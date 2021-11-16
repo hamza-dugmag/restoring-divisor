@@ -1,0 +1,35 @@
+Test #01: large over small
+    Dividend:   7 = 0111
+    Divisor:    3 = 0011
+    Quotient:   2 = 0010
+    Remainder:  1 = 0001
+
+Test #02: small over large
+    Dividend:   3 = 0011
+    Divisor:    7 = 0111
+    Quotient:   0 = 0000
+    Remainder:  3 = 0011
+
+Test #03: zero over zero
+    Dividend:   0 = 0000
+    Divisor:    0 = 0000
+    Quotient:   inf = 1111
+    Remainder:  0 = 0000
+
+Test #04: zero over number
+    Dividend:   0 = 0000
+    Divisor:    4 = 0100
+    Quotient:   0 = 0000
+    Remainder:  0 = 0000
+
+Test #05: number over zero
+    Dividend:   4 = 0100
+    Divisor:    0 = 0000
+    Quotient:   inf = 1111
+    Remainder:  4 = 0100
+
+Other test cases:
+- Changing Go signal during calculation         --> should not interrupt FSM
+- Changing Dividend signal during calculation   --> should not interrupt FSM
+- Changing Divisor signal during calculation    --> should not interrupt FSM
+- Setting Go high after calculation             --> redo division
