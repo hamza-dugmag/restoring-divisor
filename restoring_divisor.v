@@ -64,7 +64,7 @@ module restoringDivisor(Clock, Resetn, Go, Divisor, Dividend, Quotient, Remainde
 endmodule  // end restoringDivisor
 
 
-// Control =============================================================
+// control path =============================================================
 module control(
     input clk,
     input resetn,
@@ -204,7 +204,7 @@ module control(
 endmodule  // end control
 
 
-// Datapath ============================================================
+// data path ============================================================
 module datapath(
     input clk,
     input resetn,
