@@ -82,33 +82,33 @@ module control(
     reg [5:0] current_state, next_state;
     reg [1:0] counter;
     
-    localparam	S_WAIT        	= 5'd0,
-                S_LOAD   		= 5'd1,
+    localparam  S_WAIT          = 5'd0,
+                S_LOAD          = 5'd1,
                 S_SHIFT_X       = 5'd2,
-                S_SHIFT_A		= 5'd3,
-                S_SET_LSB_A		= 5'd4,
+                S_SHIFT_A       = 5'd3,
+                S_SET_LSB_A     = 5'd4,
                 S_SUB_DIVISOR   = 5'd5,
                 S_ADD_DIVISOR   = 5'd6,
-                S_SET_LSB_X   	= 5'd7,
-                S_COUNT        	= 5'd8,
-                S_DISPLAY  		= 5'd9,
-                S_BUFFER		= 5'd10;
+                S_SET_LSB_X     = 5'd7,
+                S_COUNT         = 5'd8,
+                S_DISPLAY       = 5'd9,
+                S_BUFFER        = 5'd10;
     
     // state table: next state logic
     always @(*)
     begin: state_table
         case (current_state)
-            S_WAIT: 		next_state = go ? S_LOAD : S_WAIT;
-            S_LOAD: 		next_state = S_SHIFT_X;
-            S_SHIFT_X:		next_state = S_SHIFT_A;
-            S_SHIFT_A: 		next_state = msb_x ? S_SET_LSB_A : S_SUB_DIVISOR;
-            S_SET_LSB_A:	next_state = S_SUB_DIVISOR;
-            S_SUB_DIVISOR:	next_state = S_BUFFER;
-            S_BUFFER: 		next_state = msb_a ? S_ADD_DIVISOR : S_SET_LSB_X;
-            S_ADD_DIVISOR:	next_state = S_COUNT;
-            S_SET_LSB_X:	next_state = S_COUNT;
-            S_COUNT:		next_state = (counter == 3) ? S_DISPLAY : S_SHIFT_X;
-            S_DISPLAY:		next_state = S_WAIT;
+            S_WAIT:         next_state = go ? S_LOAD : S_WAIT;
+            S_LOAD:         next_state = S_SHIFT_X;
+            S_SHIFT_X:      next_state = S_SHIFT_A;
+            S_SHIFT_A:      next_state = msb_x ? S_SET_LSB_A : S_SUB_DIVISOR;
+            S_SET_LSB_A:    next_state = S_SUB_DIVISOR;
+            S_SUB_DIVISOR:  next_state = S_BUFFER;
+            S_BUFFER:       next_state = msb_a ? S_ADD_DIVISOR : S_SET_LSB_X;
+            S_ADD_DIVISOR:  next_state = S_COUNT;
+            S_SET_LSB_X:    next_state = S_COUNT;
+            S_COUNT:        next_state = (counter == 3) ? S_DISPLAY : S_SHIFT_X;
+            S_DISPLAY:      next_state = S_WAIT;
             default: next_state = S_WAIT;
         endcase
     end  // state_table
